@@ -11,6 +11,7 @@ var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
 var clueHoldTime = 1000; //how long to hold each clue's light/sound
 var lives = 3;
+var setTime;
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
@@ -68,6 +69,7 @@ function playClueSequence(){
     delay += cluePauseTime;
   }
   clueHoldTime = 1000/(Math.pow(1.5, progress));
+  setTime = new Date().getTime()+30000;
 }
 
 function loseGame(){
@@ -145,6 +147,13 @@ function showImage(id){
 function ridImage(id){
    document.getElementById(id).style.display="none"
  }
+
+function getTime() {
+  var now = new Date().getTime();
+  var timeLeft = setTime - now;
+  document.getElementById("timeDisplay").innerHTML = timeLeft
+}
+
 // Page Initialization
 // Init Sound Synthesizer
 var AudioContext = window.AudioContext || window.webkitAudioContext 
