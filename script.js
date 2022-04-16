@@ -122,6 +122,7 @@ function guess(btn){
   } else if (progress < 7) {
     progress++;
     clearInterval(x);
+    document.getElementById("timeDisplay").innerHTML = "Pattern playing... You will have 30 seconds to replay the pattern!";
     playClueSequence();
   } else {
     winGame();
