@@ -15,6 +15,7 @@ var setTime;
 let x;
 var hardMode = false;
 var hintPlaying = false;
+var myTimeouts = [];
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
@@ -45,6 +46,9 @@ function stopGame(){
   gamePlaying = false;
   // swap the Start and Stop buttons
   clearInterval(x);
+  for(let i = 0; i< myTimeouts.length; i++) {
+    clearTimeout(myTimeouts[i]);
+  }
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   document.getElementById("modeBtn").classList.remove("hidden");
@@ -74,7 +78,7 @@ function playSingleClue(btn, i){
   if(gamePlaying){
     lightButton(btn);
     playTone(btn,clueHoldTime);
-    setTimeout(clearButton,clueHoldTime,btn);
+    myTimeouts.push(setTimeout(clearButton,clueHoldTime,btn));
     if (i == progress) {
       hintPlaying = false;
     }
@@ -100,7 +104,7 @@ function playClueSequence(){
   hintPlaying = true;
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
-    setTimeout(playSingleClue,delay,pattern[i], i) // set a timeout to play that clue
+    myTimeouts.push(setTimeout(playSingleClue,delay,pattern[i], i)); // set a timeout to play that clue
     if(hardMode){setTimeout(showBtn, delay, pattern[i]);}
     delay += clueHoldTime;
     delay += cluePauseTime;
