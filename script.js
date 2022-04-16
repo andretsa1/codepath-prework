@@ -12,10 +12,16 @@ var guessCounter = 0;
 var clueHoldTime = 1000; //how long to hold each clue's light/sound
 var lives = 3;
 var setTime;
+let x;
+var tick = false;
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 500; //how long to wait before starting playback of the clue sequence
+
+if (tick == true) {
+  x = setInterval(getTime(), 1000);
+}
 
 function startGame(){
   //initialize game variables
@@ -70,6 +76,7 @@ function playClueSequence(){
   }
   clueHoldTime = 1000/(Math.pow(1.5, progress));
   setTime = new Date().getTime()+30000;
+  tick = true;
 }
 
 function loseGame(){
@@ -100,6 +107,8 @@ function guess(btn){
     guessCounter++;
   } else if (progress < 7) {
     progress++;
+    tick = false;
+    clearInterval(x);
     playClueSequence();
   } else {
     winGame();
@@ -151,7 +160,10 @@ function ridImage(id){
 function getTime() {
   var now = new Date().getTime();
   var timeLeft = setTime - now;
-  document.getElementById("timeDisplay").innerHTML = timeLeft
+  document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!"
+  if (timeLeft < 0) {
+    loseGame();
+  }
 }
 
 // Page Initialization
