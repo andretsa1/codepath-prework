@@ -12,20 +12,26 @@ html {
 
 /* adjust typography defaults */
 body {
-  background-color: slategrey;
+  background-color: lavender;
   color: white;
   margin: 1rem;
   font-family: sans-serif;
   line-height: 1.5;
 }
 
-h1{
-  font-family: verdana, tahoma, sans-serif; 
+h1 {
+  font-family: verdana, tahoma, sans-serif;
+  color: brown;
+}
+
+p {
+  font-style: italic;
+  color: grey;
 }
 
 button {
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 100px;
 }
 
 #gameButtons > button {
