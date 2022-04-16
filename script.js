@@ -45,6 +45,10 @@ function stopGame(){
   clearInterval(x);
 }
 
+function changeMode() {
+  document.getElementById("gameMode").innerHTML = "";
+}
+
 function lightButton(btn){
   document.getElementById("button"+btn).classList.add("lit")
 }

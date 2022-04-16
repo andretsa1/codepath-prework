@@ -29,10 +29,14 @@ p {
   color: grey;
 }
 
-p .gameMode {
-  font-family: garamond, serif;
+#gameMode {
+  display: inline;
+  font-family: courier new, monospace;
   font-style: normal;
   color: black;
+  font-size: 20px;
+  padding: 10px;
+  border: 2px solid purple;
 }
 
 h2 {
