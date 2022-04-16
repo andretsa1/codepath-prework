@@ -75,8 +75,9 @@ function playSingleClue(btn){
 function showBtn(btn) {
   if(gamePlaying){
     document.getElementById("button"+btn).classList.remove("hidden");
-    delay(clueHoldTime);
-    document.getElementById("button"+btn).classList.add("hidden");
+    // setTimeout(function() {
+    //   document.getElementById("button"+btn).classList.add("hidden");
+    // }, 500);
   }
 }
 
@@ -90,17 +91,16 @@ function playClueSequence(){
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
-    setTimeout(showBtn, delay, pattern[i])
-    delay += clueHoldTime 
+    if(hardMode){setTimeout(showBtn, delay, pattern[i]);}
+    delay += clueHoldTime;
     delay += cluePauseTime;
   }
   clueHoldTime = 1000/(Math.pow(1.5, progress));
-  setTimeout(startTimer, delay-clueHoldTime-cluePauseTime);
+  setTimeout(startTimer, delay-clueHoldTime);
 }
 
 function getTime() {
   let now = new Date().getTime();
-  console.log(now);
   let timeLeft = parseInt((setTime - now)/1000);
   document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!"
   if (timeLeft <= 0) {
@@ -111,7 +111,10 @@ function getTime() {
 
 function startTimer() {
   if(hardMode) {
-    for(let i = 1; i<=5; i++) {document.getElementById("button"+i).classList.remove("hidden");}
+    for(let i = 1; i<=5; i++) {
+      document.getElementById("button"+i).classList.remove("hidden");
+      console.log(i);
+    }
   }
   setTime = new Date().getTime()+30000;
   console.log(new Date().getTime());
@@ -165,7 +168,6 @@ const freqMap = {
 }
 
 function playTone(btn,len){
-  // if(hardMode) {document.getElementById("button"+btn).classList.remove("hidden");}
   o.frequency.value = freqMap[btn]
   g.gain.setTargetAtTime(volume,context.currentTime + 0.05,0.025)
   context.resume()
