@@ -72,13 +72,25 @@ function playSingleClue(btn){
   }
 }
 
+function showBtn(btn) {
+  if(gamePlaying){
+    document.getElementById("button"+btn).classList.remove("hidden");
+    delay(clueHoldTime);
+    document.getElementById("button"+btn).classList.add("hidden");
+  }
+}
+
 function playClueSequence(){
   // context.resume()
   guessCounter = 0;
   let delay = nextClueWaitTime; //set delay to initial wait time
+  if(hardMode) {
+    for(let i = 1; i<=5; i++) {document.getElementById("button"+i).classList.add("hidden");}
+  }
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
+    setTimeout(showBtn, delay, pattern[i])
     delay += clueHoldTime 
     delay += cluePauseTime;
   }
@@ -98,6 +110,9 @@ function getTime() {
 }
 
 function startTimer() {
+  if(hardMode) {
+    for(let i = 1; i<=5; i++) {document.getElementById("button"+i).classList.remove("hidden");}
+  }
   setTime = new Date().getTime()+30000;
   console.log(new Date().getTime());
   x = setInterval(getTime, 500);
@@ -149,7 +164,8 @@ const freqMap = {
   5: 659.255
 }
 
-function playTone(btn,len){ 
+function playTone(btn,len){
+  // if(hardMode) {document.getElementById("button"+btn).classList.remove("hidden");}
   o.frequency.value = freqMap[btn]
   g.gain.setTargetAtTime(volume,context.currentTime + 0.05,0.025)
   context.resume()
@@ -169,8 +185,8 @@ function startTone(btn){
   showImage("image"+btn);
 }
 function stopTone(btn){
-  g.gain.setTargetAtTime(0,context.currentTime + 0.05,0.025)
-  tonePlaying = false
+  g.gain.setTargetAtTime(0,context.currentTime + 0.05,0.025);
+  tonePlaying = false;
   ridImage("image"+btn);
 }
 
