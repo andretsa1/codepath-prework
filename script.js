@@ -23,12 +23,12 @@ function startGame(){
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
-  playClueSequence();
-  clueHoldTime = 1000;
   for(let i = 0; i < 8; i++) {
     var temp = Math.floor(Math.random() * 5) + 1;
     pattern[i] = temp;
   }
+  playClueSequence();
+  clueHoldTime = 1000;
   console.log("The randomized pattern is: ",pattern);
   lives = 3;
 }
@@ -67,7 +67,7 @@ function playClueSequence(){
     delay += clueHoldTime 
     delay += cluePauseTime;
   }
-  clueHoldTime = 1000/(Math.pow(2, progress));
+  clueHoldTime = 1000/(Math.pow(1.5, progress));
 }
 
 function loseGame(){
