@@ -29,9 +29,16 @@ p {
   color: grey;
 }
 
+p .gameMode {
+  font-family: garamond, serif;
+  font-style: normal;
+  color: black;
+}
+
 h2 {
+  font-family: georgia, serif;
   font-style: bold;
-  color: grey;
+  color: navy;
 }
 
 #pictures > img {
