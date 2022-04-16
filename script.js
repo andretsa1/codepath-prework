@@ -14,7 +14,6 @@ var lives = 3;
 var setTime;
 let x;
 var hardMode = false;
-var hintPlaying = false;
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
@@ -52,6 +51,7 @@ function stopGame(){
 }
 
 function changeMode() {
+  // clearInterval(x);
   if (!hardMode) {
     document.getElementById("gameMode").innerHTML = "Game Mode: Hard";
     hardMode = true;
@@ -74,14 +74,14 @@ function playSingleClue(btn, i){
     lightButton(btn);
     playTone(btn,clueHoldTime);
     setTimeout(clearButton,clueHoldTime,btn);
-    if (i == progress) {
-      hintPlaying = false;
-    }
+    // if (i == progress) {
+    //   hintPlaying = false;
+    // }
   }
 }
 
 function showBtn(btn) {
-  if(hintPlaying){
+  if(gamePlaying){
     for (let i = 1; i <= 5; i++) {
       if (i != btn) {document.getElementById("button"+i).classList.add("hidden");}
     }
@@ -96,7 +96,7 @@ function playClueSequence(){
   if(hardMode) {
     for(let i = 1; i<=5; i++) {document.getElementById("button"+i).classList.add("hidden");}
   }
-  hintPlaying = true;
+  // hintPlaying = true;
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i], i) // set a timeout to play that clue
@@ -123,7 +123,7 @@ function startTimer() {
   for(let i = 1; i<=5; i++) {
     document.getElementById("button"+i).classList.remove("hidden");
   }
-  if (!hintPlaying) {
+  if (!gamePlaying) {
     setTime = new Date().getTime()+30000;
     x = setInterval(getTime, 500);
   }
