@@ -15,6 +15,7 @@ var setTime;
 let x;
 var hardMode = false;
 var myTimeout;
+var toneTimeout = [];
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
@@ -43,8 +44,7 @@ function stopGame(){
   // record that the game stopped
   gamePlaying = false;
   // swap the Start and Stop buttons
-  clearInterval(x);
-  clearTimeout(myTimeout);
+  clear();
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
   document.getElementById("modeBtn").classList.remove("hidden");
@@ -52,9 +52,17 @@ function stopGame(){
   for(let i = 1; i<=5; i++) {document.getElementById("button"+i).classList.remove("hidden");}
 }
 
-function changeMode() {
+function clear() {
   clearInterval(x);
   clearTimeout(myTimeout);
+  for(let i=0; i < toneTimeout.length; i++) {
+    clearTimeout(toneTimeout[i]);
+  }
+  toneTimeout = [];
+}
+
+function changeMode() {
+  clear();
   if (!hardMode) {
     document.getElementById("gameMode").innerHTML = "Game Mode: Hard";
     hardMode = true;
@@ -97,8 +105,8 @@ function playClueSequence(){
     for(let i = 1; i<=5; i++) {document.getElementById("button"+i).classList.add("hidden");}
   }
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
-    console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
-    setTimeout(playSingleClue,delay,pattern[i], i) // set a timeout to play that clue
+    console.log("play single clue: " + pattern[i] + " in " + delay + "ms");
+    toneTimeout.push(setTimeout(playSingleClue,delay,pattern[i], i)); // set a timeout to play that clue
     if(hardMode){setTimeout(showBtn, delay, pattern[i]);}
     delay += clueHoldTime;
     delay += cluePauseTime;
@@ -113,8 +121,7 @@ function getTime() {
   let timeLeft = parseInt((setTime - now)/1000);
   document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!"
   if (timeLeft <= 0) {
-    clearInterval(x);
-    clearTimeout(myTimeout);
+    clear();
     loseGame();
   }
 }
@@ -148,8 +155,7 @@ function guess(btn){
     if (lives==0) {
       loseGame();
     } else {
-      clearInterval(x);
-      clearTimeout(myTimeout);
+      clear();
       alert(`Wrong button! You have ${lives} lives left. We will play the sequence again.`)
       playClueSequence();
     }
@@ -157,8 +163,7 @@ function guess(btn){
     guessCounter++;
   } else if (progress < 7) {
     progress++;
-    clearInterval(x);
-    clearTimeout(myTimeout);
+    clear();
     document.getElementById("timeDisplay").innerHTML = "Pattern playing... You will have 30 seconds to replay the pattern!";
     playClueSequence();
   } else {
