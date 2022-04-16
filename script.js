@@ -37,6 +37,7 @@ function startGame(){
   clueHoldTime = 1000;
   console.log("The randomized pattern is: ",pattern);
   lives = 3;
+  if (x) {clearInterval(x);}
 }
 
 function stopGame(){
@@ -69,11 +70,14 @@ function clearButton(btn){
   document.getElementById("button"+btn).classList.remove("lit")
 }
 
-function playSingleClue(btn){
+function playSingleClue(btn, i){
   if(gamePlaying){
     lightButton(btn);
     playTone(btn,clueHoldTime);
     setTimeout(clearButton,clueHoldTime,btn);
+    if (i == progress) {
+      hintPlaying = false;
+    }
   }
 }
 
@@ -96,13 +100,13 @@ function playClueSequence(){
   hintPlaying = true;
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
-    setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
+    setTimeout(playSingleClue,delay,pattern[i], i) // set a timeout to play that clue
     if(hardMode){setTimeout(showBtn, delay, pattern[i]);}
     delay += clueHoldTime;
     delay += cluePauseTime;
   }
   clueHoldTime = 1000/(Math.pow(1.5, progress));
-  setTimeout(startTimer, delay-clueHoldTime-cluePauseTime);
+  setTimeout(startTimer, delay-clueHoldTime);
   
 }
 
