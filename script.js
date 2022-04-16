@@ -41,6 +41,7 @@ function stopGame(){
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
+  clearInterval(x);
 }
 
 function lightButton(btn){
@@ -70,11 +71,10 @@ function playClueSequence(){
     delay += cluePauseTime;
   }
   clueHoldTime = 1000/(Math.pow(1.5, progress));
-  if (!x) {
-    setTime = new Date().getTime()+30000;
-    console.log(new Date().getTime());
-    x = setInterval(getTime, 500);
-  }
+
+  setTime = new Date().getTime()+30000;
+  console.log(new Date().getTime());
+  x = setInterval(getTime, 500);
 }
 
 function getTime() {
@@ -82,7 +82,8 @@ function getTime() {
   console.log(now);
   let timeLeft = parseInt((setTime - now)/1000);
   document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!"
-  if (timeLeft < 0) {
+  if (timeLeft <= 0) {
+    clearInterval(x);
     loseGame();
   }
 }
@@ -111,7 +112,8 @@ function guess(btn){
       alert(`Wrong button! You have ${lives} lives left. We will play the sequence again.`)
       playClueSequence();
     }
-  } else if (guessCounter < progress) {
+  } 
+  else if (guessCounter < progress) {
     guessCounter++;
   } else if (progress < 7) {
     progress++;
@@ -119,6 +121,7 @@ function guess(btn){
     playClueSequence();
   } else {
     winGame();
+    clearInterval(x);
   }
 }
 

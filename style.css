@@ -29,6 +29,11 @@ p {
   color: grey;
 }
 
+h2 {
+  font-style: bold;
+  color: grey;
+}
+
 #pictures > img {
   border-radius: 200px;
   height: 400px;
