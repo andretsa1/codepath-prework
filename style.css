@@ -50,27 +50,27 @@ button {
   display: none;
 }
 
-/* .image1 {
+#image1 {
   display: none;
 }
 
-.image2 {
+#image2 {
   display: none;
 }
 
-.image3 {
+#image3 {
   display: none;
 }
 
-.image4 {
+#image4 {
   display: none;
 }
 
-.image5 {
+#image5 {
   display: none;
-} */
+}
 
-#button1:active~.image1 {
+#button1:active~#image1 {
   display: block;
 }
 

@@ -130,15 +130,21 @@ function startTone(btn){
     context.resume()
     tonePlaying = true
   }
+  showImage("image"+btn);
 }
-function stopTone(){
+function stopTone(btn){
   g.gain.setTargetAtTime(0,context.currentTime + 0.05,0.025)
   tonePlaying = false
+  ridImage("image"+btn);
 }
 
-// function showImage(){
-//    document
-//  }
+function showImage(id){
+   document.getElementById(id).style.display="inline"
+ }
+
+function ridImage(id){
+   document.getElementById(id).style.display="none"
+ }
 // Page Initialization
 // Init Sound Synthesizer
 var AudioContext = window.AudioContext || window.webkitAudioContext 
