@@ -3,12 +3,6 @@
 
 //Global Variables
 var pattern = [1, 1, 1, 1, 1, 1, 1, 1];
-for(let i = 0; i < 8; i++) {
-  var temp = Math.floor(Math.random() * 5) + 1;
-  pattern[i] = temp;
-}
-
-console.log(pattern)
 
 var progress = 0; 
 var gamePlaying = false;
@@ -16,6 +10,7 @@ var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
 var clueHoldTime = 1000; //how long to hold each clue's light/sound
+var lives = 3;
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
@@ -30,6 +25,12 @@ function startGame(){
   document.getElementById("stopBtn").classList.remove("hidden");
   playClueSequence();
   clueHoldTime = 1000;
+  for(let i = 0; i < 8; i++) {
+    var temp = Math.floor(Math.random() * 5) + 1;
+    pattern[i] = temp;
+  }
+  console.log(pattern);
+  lives = 3;
 }
 
 function stopGame(){
@@ -66,7 +67,7 @@ function playClueSequence(){
     delay += clueHoldTime 
     delay += cluePauseTime;
   }
-  clueHoldTime -= 100;
+  clueHoldTime = 1000/(Math.pow(2, progress));
 }
 
 function loseGame(){
@@ -86,7 +87,12 @@ function guess(btn){
   }
   // add game logic here
   if (btn != pattern[guessCounter]) {
-    loseGame();
+    lives--;
+    if (lives==0) {
+      loseGame();
+    } else {
+      alert("Wrong button! You have {0} lives left.", lives)
+    }
   } else if (guessCounter < progress) {
     guessCounter++;
   } else if (progress < 7) {
