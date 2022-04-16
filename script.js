@@ -70,6 +70,11 @@ function playClueSequence(){
     delay += cluePauseTime;
   }
   clueHoldTime = 1000/(Math.pow(1.5, progress));
+  if (!x) {
+      setTime = new Date().getTime()+30000;
+      console.log(new Date().getTime());
+      x = setInterval(getTime, 500);
+    }
 }
 
 function loseGame(){
@@ -142,15 +147,16 @@ function stopTone(btn){
 }
 
 function showImage(id){
-   document.getElementById(id).style.display="inline"
+   document.getElementById(id).style.display="inline";
  }
 
 function ridImage(id){
-   document.getElementById(id).style.display="none"
+   document.getElementById(id).style.display="none";
  }
 
 function getTime() {
   let now = new Date().getTime();
+  console.log(now);
   let timeLeft = parseInt((setTime - now)/1000);
   document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!"
   if (timeLeft < 0) {
