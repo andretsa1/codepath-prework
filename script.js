@@ -2,16 +2,22 @@
     to your site with Javascript */
 
 //Global Variables
+var pattern = [1, 1, 1, 1, 1, 1, 1, 1];
+for(let i = 0; i < 8; i++) {
+  var temp = Math.floor(Math.random() * 5) + 1;
+  pattern[i] = temp;
+}
 
-var pattern = [2, 1, 2, 4, 3, 2, 4, 1];
+console.log(pattern)
+
 var progress = 0; 
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
+var clueHoldTime = 1000; //how long to hold each clue's light/sound
 
 // global constants
-const clueHoldTime = 1000; //how long to hold each clue's light/sound
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 500; //how long to wait before starting playback of the clue sequence
 
@@ -23,6 +29,7 @@ function startGame(){
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   playClueSequence();
+  clueHoldTime = 1000;
 }
 
 function stopGame(){
@@ -59,6 +66,7 @@ function playClueSequence(){
     delay += clueHoldTime 
     delay += cluePauseTime;
   }
+  clueHoldTime -= 100;
 }
 
 function loseGame(){
@@ -96,7 +104,8 @@ const freqMap = {
   1: 440,
   2: 493.883,
   3: 554.365,
-  4: 587.329
+  4: 587.329,
+  5: 659.255
 }
 
 function playTone(btn,len){ 
