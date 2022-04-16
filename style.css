@@ -103,7 +103,7 @@ button {
   background: lightyellow;
 }
 #button5 {
-  background: lightgrey;
+  background: chocolate;
 }
 
 #button1:active, #button1.lit {
@@ -119,7 +119,7 @@ button {
   background: yellow;
 }
 #button5:active, #button5.lit {
-  background: grey;
+  background: saddlebrown;
 }
 
 
