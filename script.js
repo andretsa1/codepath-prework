@@ -136,6 +136,9 @@ function stopTone(){
   tonePlaying = false
 }
 
+// function showImage(){
+//    document
+//  }
 // Page Initialization
 // Init Sound Synthesizer
 var AudioContext = window.AudioContext || window.webkitAudioContext 
