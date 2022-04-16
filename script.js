@@ -119,7 +119,10 @@ function playClueSequence(){
 function getTime() {
   let now = new Date().getTime();
   let timeLeft = parseInt((setTime - now)/1000);
-  document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!"
+  document.getElementById("timeDisplay").innerHTML = timeLeft + "s left to guess!";
+  for(let i = 1; i<=5; i++) {
+    document.getElementById("button"+i).classList.remove("hidden");
+  }
   if (timeLeft <= 0) {
     clear();
     loseGame();
@@ -127,9 +130,6 @@ function getTime() {
 }
 
 function startTimer() {
-  for(let i = 1; i<=5; i++) {
-    document.getElementById("button"+i).classList.remove("hidden");
-  }
   setTime = new Date().getTime()+30000;
   x = setInterval(getTime, 500);
 }
