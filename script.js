@@ -91,7 +91,8 @@ function guess(btn){
     if (lives==0) {
       loseGame();
     } else {
-      alert("Wrong button! You have {0} lives left.", lives)
+      alert(`Wrong button! You have ${lives} lives left. We will play the sequence again.`)
+      playClueSequence();
     }
   } else if (guessCounter < progress) {
     guessCounter++;
