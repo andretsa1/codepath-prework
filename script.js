@@ -26,6 +26,8 @@ function startGame(){
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
+  document.getElementById("gameMode").classList.add("hidden");
+  document.getElementById("timeDisplay").innerHTML = "Pattern playing... You will have 30 seconds to replay the pattern!";
   for(let i = 0; i < 8; i++) {
     var temp = Math.floor(Math.random() * 5) + 1;
     pattern[i] = temp;
@@ -43,6 +45,8 @@ function stopGame(){
   clearInterval(x);
   document.getElementById("startBtn").classList.remove("hidden");
   document.getElementById("stopBtn").classList.add("hidden");
+  document.getElementById("gameMode").classList.remove("hidden");
+  document.getElementById("timeDisplay").innerHTML = "Click start to begin the game!";
   clearInterval(x);
 }
 
@@ -74,10 +78,10 @@ function playSingleClue(btn){
 
 function showBtn(btn) {
   if(gamePlaying){
+    for (let i = 1; i <= 5; i++) {
+      if (i != btn) {document.getElementById("button"+i).classList.add("hidden");}
+    }
     document.getElementById("button"+btn).classList.remove("hidden");
-    // setTimeout(function() {
-    //   document.getElementById("button"+btn).classList.add("hidden");
-    // }, 500);
   }
 }
 
@@ -113,11 +117,9 @@ function startTimer() {
   if(hardMode) {
     for(let i = 1; i<=5; i++) {
       document.getElementById("button"+i).classList.remove("hidden");
-      console.log(i);
     }
   }
   setTime = new Date().getTime()+30000;
-  console.log(new Date().getTime());
   x = setInterval(getTime, 500);
 }
 
