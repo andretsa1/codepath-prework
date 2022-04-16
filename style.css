@@ -19,12 +19,36 @@ body {
   line-height: 1.5;
 }
 
-body h1{
+h1{
   font-family: verdana, tahoma, sans-serif; 
 }
 
 button {
-  padding: 10
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#gameButtons > button {
+  width: 200px;
+  height: 200px;
+  margin: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+#button1:active {
+  background: green;
+}
+#button2:active {
+  background: blue;
+}
+#button3:active {
+  background: red;
+}
+#button4:active {
+  background: yellow;
 }
 
 /* images and videos max out at full width */
