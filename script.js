@@ -114,13 +114,11 @@ function getTime() {
 }
 
 function startTimer() {
-  // if(hardMode) {
-    for(let i = 1; i<=5; i++) {
-      document.getElementById("button"+i).classList.remove("hidden");
-    }
-  // }
-  setTime = new Date().getTime()+30000;
-  x = setInterval(getTime, 500);
+   
+  if (gamePlaying) {
+    setTime = new Date().getTime()+30000;
+    x = setInterval(getTime, 500);
+  }
 }
 
 function loseGame(){
