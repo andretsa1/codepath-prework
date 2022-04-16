@@ -29,7 +29,7 @@ function startGame(){
     var temp = Math.floor(Math.random() * 5) + 1;
     pattern[i] = temp;
   }
-  console.log(pattern);
+  console.log("The randomized pattern is: ",pattern);
   lives = 3;
 }
 
@@ -103,8 +103,6 @@ function guess(btn){
     winGame();
   }
 }
-
-console.log("Hello, world!");
 
 // Sound Synthesis Functions
 const freqMap = {
