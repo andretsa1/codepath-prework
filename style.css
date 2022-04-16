@@ -29,6 +29,12 @@ p {
   color: grey;
 }
 
+#pictures > img {
+  border-radius: 200px;
+  height: 400px;
+  width: 400px;
+}
+
 button {
   padding: 10px;
   border-radius: 100px;
