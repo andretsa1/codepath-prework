@@ -79,9 +79,10 @@ function guess(btn){
   if (btn != pattern[guessCounter]) {
     loseGame();
   } else if (guessCounter < progress) {
-      guessCounter++;
+    guessCounter++;
   } else if (progress < 7) {
     progress++;
+    playClueSequence();
   } else {
     winGame();
   }
@@ -96,6 +97,7 @@ const freqMap = {
   3: 554.365,
   4: 587.329
 }
+
 function playTone(btn,len){ 
   o.frequency.value = freqMap[btn]
   g.gain.setTargetAtTime(volume,context.currentTime + 0.05,0.025)
