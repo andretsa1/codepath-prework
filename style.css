@@ -12,9 +12,19 @@ html {
 
 /* adjust typography defaults */
 body {
+  background-color: slategrey;
+  color: white;
   margin: 1rem;
   font-family: sans-serif;
   line-height: 1.5;
+}
+
+body h1{
+  font-family: verdana, tahoma, sans-serif; 
+}
+
+button {
+  padding: 10
 }
 
 /* images and videos max out at full width */
