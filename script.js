@@ -75,8 +75,16 @@ function guess(btn){
   if(!gamePlaying){
     return;
   }
-  
   // add game logic here
+  if (btn != pattern[guessCounter]) {
+    loseGame();
+  } else if (guessCounter < progress) {
+      guessCounter++;
+  } else if (progress < 7) {
+    progress++;
+  } else {
+    winGame();
+  }
 }
 
 console.log("Hello, world!");
