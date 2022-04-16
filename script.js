@@ -13,6 +13,7 @@ var clueHoldTime = 1000; //how long to hold each clue's light/sound
 var lives = 3;
 var setTime;
 let x;
+var hardMode = false;
 
 // global constants
 const cluePauseTime = 333; //how long to pause in between clues
@@ -46,7 +47,13 @@ function stopGame(){
 }
 
 function changeMode() {
-  document.getElementById("gameMode").innerHTML = "";
+  if (!hardMode) {
+    document.getElementById("gameMode").innerHTML = "Game Mode: Hard";
+    hardMode = true;
+  } else {
+    document.getElementById("gameMode").innerHTML = "Game Mode: Easy";
+    hardMode = false;
+  }
 }
 
 function lightButton(btn){
