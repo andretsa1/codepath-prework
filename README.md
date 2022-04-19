@@ -47,7 +47,10 @@ The following **additional** features are implemented:
 
 **Winning the game in hard mode**: This gif shows the features of the hard game mode as well as the decreasing (decay function) clueHoldTime and the winning scenario. It also shows how the navy blue text above the start/stop button changes between {"Click start to begin!", "Pattern playing...", Countdown Timer} accordingly.
 
-![](https://i.imgur.com/sx30rnf.gif)
+00:00 - 00:25 :
+![](https://i.imgur.com/qB4C9J5.gif)
+00:25 - 00:50 :
+![](https://i.imgur.com/zS882xr.gif)
 
 **Randomized Patterns**: Whenever the player restarts, a new secret pattern is generated.
 
